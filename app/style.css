@@ -1,0 +1,236 @@
+/* Vice Coast Cover Maker — editor chrome. Fonts ship under app/fonts/. */
+@font-face {
+  font-family: 'Anton';
+  src: url('fonts/Anton-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Pacifico';
+  src: url('fonts/Pacifico-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  --bg: #0e0718;
+  --panel: #1b1029;
+  --panel-2: #261839;
+  --line: #3d2c58;
+  --text: #f6effd;
+  --muted: #bda9d8;
+  --accent: #ff2e88;
+  --accent-2: #00e5ff;
+  --gold: #ffd76e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 22px;
+  background: linear-gradient(90deg, #2b1055, #7b2ff7 55%, #ff2e88);
+  border-bottom: 3px solid var(--gold);
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: center; gap: 14px; }
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: var(--gold);
+  color: #2b1055;
+  font-family: Anton, sans-serif;
+  font-size: 24px;
+  letter-spacing: 1px;
+  transform: rotate(-4deg);
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: Anton, sans-serif;
+  font-size: 30px;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.tagline { margin: 4px 0 0; color: #ffe9f4; font-size: 13px; }
+
+.top-actions { display: flex; gap: 10px; }
+
+.btn {
+  appearance: none;
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 18px;
+  font: 700 15px/1 system-ui, sans-serif;
+  cursor: pointer;
+  color: #fff;
+  background: #3d2c58;
+}
+.btn:hover { filter: brightness(1.15); }
+.btn.primary { background: var(--accent); box-shadow: 0 4px 0 #a3134e; }
+.btn.ghost { background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.5); }
+.btn.small { padding: 8px 12px; font-size: 13px; width: 100%; margin-top: 8px; }
+
+.editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
+  gap: 22px;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 22px;
+  align-items: start;
+}
+
+.preview-pane { position: sticky; top: 16px; }
+
+#coverCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 3px solid var(--line);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  cursor: grab;
+  background: #2b1055;
+  touch-action: none;
+}
+#coverCanvas:active { cursor: grabbing; }
+
+.preview-hint, .status { color: var(--muted); font-size: 13px; }
+.status { color: var(--gold); }
+
+.controls { display: flex; flex-direction: column; gap: 16px; }
+
+.group {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.group h2 {
+  margin: 0 0 12px;
+  font-family: Anton, sans-serif;
+  font-size: 17px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.choice {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 8px 12px;
+  font: 600 13px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+}
+.choice:hover { border-color: var(--accent-2); }
+.choice.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.choice.swatch::before {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--swatch);
+  margin-right: 7px;
+  vertical-align: -1px;
+}
+
+.upload-btn {
+  display: block;
+  text-align: center;
+  background: var(--accent-2);
+  color: #04222a;
+  font-weight: 800;
+  border-radius: 10px;
+  padding: 11px;
+  cursor: pointer;
+}
+.upload-btn:hover { filter: brightness(1.1); }
+
+.note { color: var(--muted); font-size: 13px; margin: 8px 0 0; }
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.panel-strip { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
+.panel-btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font: 600 12px/1.2 system-ui, sans-serif;
+  cursor: pointer;
+}
+.panel-btn.active { background: var(--accent); border-color: var(--accent); }
+
+.slider-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.slider-label span { float: right; color: var(--gold); }
+.slider-label input[type="range"] { width: 100%; accent-color: var(--accent); }
+
+.field { display: block; font-size: 13px; font-weight: 700; margin-top: 10px; }
+.field input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--line);
+  background: #0e0718;
+  color: var(--text);
+  font: 600 15px/1.3 system-ui, sans-serif;
+}
+.field input:focus { outline: 2px solid var(--accent-2); }
+
+.fineprint { color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .editor { grid-template-columns: 1fr; }
+  .preview-pane { position: static; }
+}
+
+/* Screenshot mode: cover shots show only the canvas, edge to edge. */
+body.shot-cover .topbar,
+body.shot-cover .controls,
+body.shot-cover .preview-hint,
+body.shot-cover .status { display: none; }
+body.shot-cover .editor { display: block; padding: 0; max-width: none; }
+body.shot-cover .preview-pane { position: static; }
+body.shot-cover #coverCanvas { border: 0; border-radius: 0; box-shadow: none; }
